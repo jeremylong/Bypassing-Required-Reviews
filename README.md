@@ -1,28 +1,23 @@
-# Bypassing Required Reviews - Continued 
+# Bypassing Required Reviews - Continued
 
 Last year Cider Security disclosed a mechanism via the GitHub Bug Bounty program that allowed a contributor
 to approve their own PR using the `github-actions bot`; see [Bypassing required reviews using GitHub Actions](https://medium.com/cider-sec/bypassing-required-reviews-using-github-actions-6e1b29135cc7)
 
 In March 2022, I discovered that the `github-actions bot` could create a PR and a contributor
-could then approve the PR. The following write-up was submitted to HackerOne; however, the 
+could then approve the PR. The following write-up was submitted to HackerOne; however, the
 same bypass had already been disclosed in January 2022. A fix was introduced on May 3rd, 2022
 to allow organization administrators to prevent the `github-actions bot` from creating a PR:
 
 [GitHub Actions: Prevent GitHub Actions from creating and approving pull requests](https://github.blog/changelog/2022-05-03-github-actions-prevent-github-actions-from-creating-and-approving-pull-requests/)
 
-While this fix combined with the fix for Cider Security's finding is a good
-start it still leaves a few open problems.
+This fix combined with the fix for Cider Security's finding is a great! The two items from
+my submission to GitHub that I feel are still a problem are:
 
-1. The fixes are only configurable in an organization. Which means any project under a
-   regular user account **cannot enable this protection**. So any repository under a user's
-   account with mulitple contributors is still vulnerable.
-2. The **fixes are not retro-active** - for existing organizations you need to have an
-   organization administrator update the settings.
-3. If you have a **Personal Access Token (PAT) stored in your GitHub Secrets** - you are
+1. If you have a **Personal Access Token (PAT) stored in your GitHub Secrets** - you are
    likely **still vulnerable** as a contributor could use these techniques using the PAT
    instead of the `github-action bot` to create or approve a PR (depending on the associated
    rights for the PAT).
-4. A contributor still has the ability to clean-up their tracks - as most if not all
+2. A contributor still has the ability to clean-up their tracks - as most if not all
    evidence can be deleted using the rights granted to a contributor. Specifically,
    a contributor can delete a workflow run and the associated branch - effectively
    erasing the malicious workflow file and the execution logs. The only evidence
@@ -189,6 +184,4 @@ in GitHub. Bob is the owner of the repository and Alice is a contributor.
 
 ## Recommendations
 
-1. For organization - ensure that GitHub Actions cannot approve or create PRs.
-2. For user owned repos with multiple contributors - open support tickets with GitHub to make the protections not just at the organization leve but also at the repository level.
-3. NEVER store a PAT in GitHub Secrets.
+1. NEVER store a PAT in GitHub Secrets.
