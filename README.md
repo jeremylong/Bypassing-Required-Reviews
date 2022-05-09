@@ -10,7 +10,7 @@ to allow organization administrators to prevent the `github-actions bot` from cr
 
 [GitHub Actions: Prevent GitHub Actions from creating and approving pull requests](https://github.blog/changelog/2022-05-03-github-actions-prevent-github-actions-from-creating-and-approving-pull-requests/)
 
-This fix combined with the fix for Cider Security's finding is a great! The two items from
+This fix combined with the fix for Cider Security's finding is great! The two items from
 my submission to GitHub that I feel are still a problem are:
 
 1. If you have a **Personal Access Token (PAT) stored in your GitHub Secrets** - you are
